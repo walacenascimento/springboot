@@ -1,6 +1,8 @@
 package br.com.alura.screanmacth;
 
+import br.com.alura.screanmacth.model.DadosSerie;
 import br.com.alura.screanmacth.service.ConsumoAPI;
+import br.com.alura.screanmacth.service.ConverteDados;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,13 +17,17 @@ public class ScreanmacthApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		ConsumoAPI consumoAPI = new ConsumoAPI();
+		var consumoAPI = new ConsumoAPI();
 		var json =  consumoAPI.obterDados("https://www.omdbapi.com/?t=gilmore+girls&apikey=6585022c");
 		System.out.println(json);
 
+		ConverteDados conversor = new ConverteDados();
+		DadosSerie dados = conversor.obterDados(json, DadosSerie.class);
+		System.out.println(dados);
+
 		// API de imagem café
-		json = consumoAPI.obterDados("https://coffee.alexflipnote.dev/random.json");
-		System.out.println(json);
+//		json = consumoAPI.obterDados("https://coffee.alexflipnote.dev/random.json");
+//		System.out.println(json);
 
 	}
 }
