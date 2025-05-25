@@ -1,11 +1,13 @@
 package br.com.alura.contador.contador;
 
-import br.com.alura.contador.contador.model.Desafio1;
+import br.com.alura.contador.contador.model.Avaliacao;
+import br.com.alura.contador.contador.model.Tarefa;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.util.Scanner;
+import java.io.File;
 
 @SpringBootApplication
 public class ContadorApplication implements CommandLineRunner {
@@ -17,16 +19,30 @@ public class ContadorApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		// Desafio 1
-		var desafio1 = new Desafio1();
-		desafio1.digitarNumero();
+//		var desafio1 = new Desafio1();
+//		desafio1.digitarNumero();
 
-//		Scanner leitura = new Scanner(System.in);
-//		System.out.println("Digite um número: ");
-//
-//		int numero = leitura.nextInt();
-//
-//		for (int i = 1; i <= numero ; i++) {
-//			System.out.println(i);
-//		}
+		// Desafio 2
+		//Tarefa tarefa = new Tarefa( "Estudar a noite", true, "Eu");
+		//tarefa.tarefa("dever de casa", true, "Eu");
+
+		// Serializando dados
+
+		ObjectMapper objectMapper = new ObjectMapper();
+
+		// Gravando o dados no arquivo em um formando json
+//		objectMapper.writeValue(new File("tarefa.json"), tarefa);
+//		System.out.println("Dados salvos no arquivo tarefa.json!");
+
+		// Desserializando dados:
+		// Lendo dados do arquivo Json
+//		Tarefa tarefaLida = objectMapper.readValue(new File("tarefa.json"), Tarefa.class);
+//		System.out.println("Tarefa lida do JSON:");
+//		System.out.println(tarefaLida);
+
+		// chamando a classe genérica
+		Avaliacao avaliacao = new Avaliacao<>("Filme", 10, "Muito Bom");
+		System.out.println(avaliacao);
+
 	}
 }
