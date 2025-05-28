@@ -24,9 +24,10 @@ public class Episodio {
 
         try{
             this.dataLancamento = LocalDate.parse(dadosEpisodio.dataDeLancamento());
-        } catch (NullPointerException e) {
+        } catch (NullPointerException ex) {
             this.dataLancamento = null;
         }
+
 
     }
 
