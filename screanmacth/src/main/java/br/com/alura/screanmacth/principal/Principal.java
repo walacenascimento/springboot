@@ -3,6 +3,7 @@ package br.com.alura.screanmacth.principal;
 import br.com.alura.screanmacth.model.DadosEpisodio;
 import br.com.alura.screanmacth.model.DadosSerie;
 import br.com.alura.screanmacth.model.DadosTemporada;
+import br.com.alura.screanmacth.model.Episodio;
 import br.com.alura.screanmacth.service.ConsumoAPI;
 import br.com.alura.screanmacth.service.ConverteDados;
 
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class Principal {
@@ -62,6 +64,14 @@ public class Principal {
                 .sorted(Comparator.comparing(DadosEpisodio::avaliacao).reversed())
                 .limit(5)
                 .forEach(System.out::println);
+
+        // Ciando uma nova classe, para lidar com os dados dos episódios
+        List<Episodio> episodios = temporadas.stream()
+                .flatMap(t -> t.episodios().stream()
+                        .map(d -> new Episodio(t.numero(), d))
+                ).collect(Collectors.toList());
+
+        episodios.forEach(System.out::println);
 
     }
 }
