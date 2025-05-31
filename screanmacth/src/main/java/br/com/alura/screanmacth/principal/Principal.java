@@ -76,19 +76,26 @@ public class Principal {
         episodios.forEach(System.out::println);
 
         // Buscando episodios a partir da primeira ocorrencia
-        System.out.println("Digite um trecho do título do episódio");
-        var trechoTitulo = leitura.nextLine();
-        Optional<Episodio> episodioBuscado = episodios.stream()
-                .filter(e -> e.getTitulo().toUpperCase().contains(trechoTitulo.toUpperCase()))
-                .findFirst();
-        if(episodioBuscado.isPresent()){
-            System.out.println("Episódio encontrado!");
-            System.out.println("Temporada: " + episodioBuscado.get().getTemporada());
-            System.out.println("Episódio: " + episodioBuscado.get().getTitulo());
-            System.out.println("Ano da temporda " + episodioBuscado.get().getDataLancamento());
-        } else {
-            System.out.println("Episódio não encontrado!");
-        }
+//        System.out.println("Digite um trecho do título do episódio");
+//        var trechoTitulo = leitura.nextLine();
+//        Optional<Episodio> episodioBuscado = episodios.stream()
+//                .filter(e -> e.getTitulo().toUpperCase().contains(trechoTitulo.toUpperCase()))
+//                .findFirst();
+//        if(episodioBuscado.isPresent()){
+//            System.out.println("Episódio encontrado!");
+//            System.out.println("Temporada: " + episodioBuscado.get().getTemporada());
+//            System.out.println("Episódio: " + episodioBuscado.get().getTitulo());
+//            System.out.println("Ano da temporda " + episodioBuscado.get().getDataLancamento());
+//        } else {
+//            System.out.println("Episódio não encontrado!");
+//        }
+
+        // Criando uma MAPA com dados, para filtrar a média de avaliação das temporadas
+        Map<Integer, Double> avaliacoesPorTemporada = episodios.stream()
+                .filter(e -> e.getAvaliacao() > 0.0)
+                .collect(Collectors.groupingBy(Episodio::getTemporada,
+                        Collectors.averagingDouble(Episodio::getAvaliacao)));
+        System.out.println(avaliacoesPorTemporada);
 
 
         // Buscando episodios a partir de uma data
