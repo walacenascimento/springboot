@@ -9,7 +9,7 @@ public class Episodio {
     private String titulo;
     private Integer numeroEpisodio;
     private Double avaliacao;
-    private LocalDate dataLancamento;
+    private String dataLancamento;
 
     public Episodio(Integer numeroTemporada, DadosEpisodio dadosEpisodio) {
         this.temporada = numeroTemporada;
@@ -23,11 +23,10 @@ public class Episodio {
         }
 
         try{
-            this.dataLancamento = LocalDate.parse(dadosEpisodio.dataDeLancamento());
-        } catch (NullPointerException ex) {
+            this.dataLancamento = dadosEpisodio.dataDeLancamento();
+        } catch (Exception e) {
             this.dataLancamento = null;
         }
-
 
     }
 
@@ -63,11 +62,11 @@ public class Episodio {
         this.avaliacao = avaliacao;
     }
 
-    public LocalDate getDataLancamento() {
+    public String getDataLancamento() {
         return dataLancamento;
     }
 
-    public void setDataLancamento(LocalDate dataLancamento) {
+    public void setDataLancamento(String dataLancamento) {
         this.dataLancamento = dataLancamento;
     }
 

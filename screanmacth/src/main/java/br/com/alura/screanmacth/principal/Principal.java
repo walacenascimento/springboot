@@ -25,10 +25,13 @@ public class Principal {
     private final String ENDERECO = "https://www.omdbapi.com/?t=";
     private final String API_KEY = "&apikey=6585022c";
 
+    // "https://www.omdbapi.com/?t=game+of+thrones&apikey=6585022c"
+
     public void exibeMenu(){
         System.out.println("Digite o nome da serie");
         var nomeSerie = leitura.nextLine();
-        var json =  consumo.obterDados(ENDERECO + nomeSerie.replace(" ", "+") + API_KEY);
+         var json =  consumo.obterDados(ENDERECO + nomeSerie.replace(" ", "+") + API_KEY);
+
         DadosSerie dados = conversor.obterDados(json, DadosSerie.class);
         System.out.println(dados);
 
@@ -77,19 +80,19 @@ public class Principal {
 
         // Buscando episodios a partir de uma data
 
-        System.out.println("A partir de que ano você deseja ver os episódios? ");
-        var ano = leitura.nextInt();
-        leitura.nextLine();
-
-        LocalDate dataBusca = LocalDate.of(ano, 1, 1);
-        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-        episodios.stream()
-                .filter(e -> e.getDataLancamento() != null && e.getDataLancamento().isAfter(dataBusca))
-                .forEach(e -> System.out.println(
-                "Temporada: " + e.getTemporada() +
-                        " Episódio: " + e.getTitulo() +
-                        " Data lançamento: " + e.getDataLancamento().format(formatador)
-                ));
+//        System.out.println("A partir de que ano você deseja ver os episódios? ");
+//        var ano = leitura.nextInt();
+//        leitura.nextLine();
+//
+//        LocalDate dataBusca = LocalDate.of(ano, 1, 1);
+//        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+//
+//        episodios.stream()
+//                .filter(e -> e.getDataLancamento() != null && e.getDataLancamento().isAfter(dataBusca))
+//                .forEach(e -> System.out.println(
+//                "Temporada: " + e.getTemporada() +
+//                        " Episódio: " + e.getTitulo() +
+//                        " Data lançamento: " + e.getDataLancamento().format(formatador)
+//                ));
     }
 }
