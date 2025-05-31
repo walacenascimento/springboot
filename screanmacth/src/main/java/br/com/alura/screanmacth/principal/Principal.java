@@ -91,11 +91,21 @@ public class Principal {
 //        }
 
         // Criando uma MAPA com dados, para filtrar a média de avaliação das temporadas
-        Map<Integer, Double> avaliacoesPorTemporada = episodios.stream()
+//        Map<Integer, Double> avaliacoesPorTemporada = episodios.stream()
+//                .filter(e -> e.getAvaliacao() > 0.0)
+//                .collect(Collectors.groupingBy(Episodio::getTemporada,
+//                        Collectors.averagingDouble(Episodio::getAvaliacao)));
+//        System.out.println(avaliacoesPorTemporada);
+
+        // Criando uma MAPA com a classe DoubleSummaryStatistics, para filtrar,
+        // e somar a média das avaliação das temporadas
+        DoubleSummaryStatistics est = episodios.stream()
                 .filter(e -> e.getAvaliacao() > 0.0)
-                .collect(Collectors.groupingBy(Episodio::getTemporada,
-                        Collectors.averagingDouble(Episodio::getAvaliacao)));
-        System.out.println(avaliacoesPorTemporada);
+                .collect(Collectors.summarizingDouble(Episodio::getAvaliacao));
+        System.out.println("Média: " + est.getAverage());
+        System.out.println("Melhor episódio: " + est.getMax());
+        System.out.println("Pior episódio: " + est.getMin());
+        System.out.println("Quantidade: " + est.getCount());
 
 
         // Buscando episodios a partir de uma data
