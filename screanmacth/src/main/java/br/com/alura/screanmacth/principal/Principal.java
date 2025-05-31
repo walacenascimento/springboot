@@ -9,10 +9,7 @@ import br.com.alura.screanmacth.service.ConverteDados;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -77,6 +74,22 @@ public class Principal {
                 ).collect(Collectors.toList());
 
         episodios.forEach(System.out::println);
+
+        // Buscando episodios a partir da primeira ocorrencia
+        System.out.println("Digite um trecho do título do episódio");
+        var trechoTitulo = leitura.nextLine();
+        Optional<Episodio> episodioBuscado = episodios.stream()
+                .filter(e -> e.getTitulo().toUpperCase().contains(trechoTitulo.toUpperCase()))
+                .findFirst();
+        if(episodioBuscado.isPresent()){
+            System.out.println("Episódio encontrado!");
+            System.out.println("Temporada: " + episodioBuscado.get().getTemporada());
+            System.out.println("Episódio: " + episodioBuscado.get().getTitulo());
+            System.out.println("Ano da temporda " + episodioBuscado.get().getDataLancamento());
+        } else {
+            System.out.println("Episódio não encontrado!");
+        }
+
 
         // Buscando episodios a partir de uma data
 
